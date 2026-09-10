@@ -3,10 +3,11 @@
 Governed Wazuh 4.14.7 single-node deployment for security monitoring.
 
 - Target: 37.27.128.39 / private 10.40.0.4
-- Dashboard: https://10.40.0.4:15601
-- API: https://10.40.0.4:15500
-- Indexer: https://10.40.0.4:19200
-- Agent enrollment and events are private-vSwitch only.
+- Public dashboard: https://wazuh.codestra.co
+- Private dashboard: https://10.40.0.4:15601
+- Private API: https://10.40.0.4:15500
+- Private indexer: https://10.40.0.4:19200
+- Agent enrollment, events, API, and indexer traffic remain private-vSwitch only.
 - Rotated credentials are stored only on the manager at `/etc/codestra/secrets/wazuh.env` with mode 0600.
 
 ## Active integrations
@@ -23,4 +24,4 @@ Run `sudo ./scripts/deploy.sh` on the manager. To enroll another Ubuntu or Debia
 sudo ./scripts/install-agent.sh 10.40.0.4 unique-agent-name
 ```
 
-Use `sudo ./scripts/status.sh` for manager service health. Public ingress remains intentionally disabled until dedicated DNS and TLS names are available.
+Use `sudo ./scripts/status.sh` for manager service health.
