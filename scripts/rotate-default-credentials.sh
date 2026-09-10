@@ -14,7 +14,7 @@ fi
 umask 077
 admin_password="Wa1!$(openssl rand -hex 20)"
 api_password="Wu1!$(openssl rand -hex 20)"
-admin_hash="$(printf '%s\n' "$admin_password" | docker run --rm -i wazuh/wazuh-indexer:4.14.7 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh | tail -n 1)"
+admin_hash="$(docker run --rm -e WAZUH_HASH_INPUT="$admin_password" wazuh/wazuh-indexer:4.14.7 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh -env WAZUH_HASH_INPUT | tail -n 1)"
 [[ "$admin_hash" == '$2y$'* ]] || { echo "Password hash generation failed" >&2; exit 1; }
 cd "$STACK"
 docker compose down
